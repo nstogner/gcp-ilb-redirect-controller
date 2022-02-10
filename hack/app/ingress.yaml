@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: foo
+  namespace: default
+  annotations:
+    ingress.gcp.kubernetes.io/pre-shared-cert: "foo-cert"
+    kubernetes.io/ingress.class: "gce-internal"
+    kubernetes.io/ingress.allow-http: "false" # Needed for the gce-ingress controller to create a HTTPS load balancer.
+    kubernetes.io/ingress.regional-static-ip-name: "foo-1"
+    networking.gke.io/ilb-https-redirect: "ok"
+spec:
+  rules:
+  - host: example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: foo
+            port: 
+              number: 80

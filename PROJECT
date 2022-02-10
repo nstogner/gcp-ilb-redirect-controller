@@ -1,0 +1,6 @@
+domain: networking.gke.io
+layout:
+- go.kubebuilder.io/v3
+projectName: gcp-ilb-redirect-controller
+repo: github.com/nstogner/gcp-ilb-redirect-controller
+version: "3"
