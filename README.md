@@ -20,7 +20,7 @@ metadata:
     networking.gke.io/ilb-https-redirect: "ok" # <-- This controller will look at this annotation and add a Forwarding Rule that redirects HTTP to HTTPS.
 ```
 
-## Install
+## Install in Cluster
 
 Deploy controller.
 
@@ -55,6 +55,8 @@ kubectl annotate serviceaccount $KSA_NAME \
 ```
 
 ## Run Locally
+
+When you run locally (instead of installing in the cluster), the controller will use local Kubeconfig credentials to connect to Kubernetes and local GCP credentials to operate against GCP.
 
 ```sh
 make run PROJECT=<your-gcp-project> REGION=<your-gke-region>
