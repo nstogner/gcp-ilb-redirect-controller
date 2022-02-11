@@ -4,8 +4,10 @@ import (
 	"context"
 	"fmt"
 	"net/http"
+	"strings"
 
 	compute "cloud.google.com/go/compute/apiv1"
+	"cloud.google.com/go/compute/metadata"
 	"google.golang.org/api/googleapi"
 )
 
@@ -43,6 +45,22 @@ func NewClient(ctx context.Context) (*Client, error) {
 		RegionTargetHttpProxies: targetHttpProxies,
 		ForwardingRules:         forwardingRules,
 	}, nil
+}
+
+func (c *Client) ProjectID() string {
+	project, _ := metadata.ProjectID()
+	return project
+}
+
+func (c *Client) Region() string {
+	zone, _ := metadata.Zone()
+
+	split := strings.Split(zone, "-")
+	if len(split) == 3 {
+		return split[0] + "-" + split[1]
+	}
+
+	return ""
 }
 
 func (c *Client) Close() {

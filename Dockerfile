@@ -11,7 +11,8 @@ RUN go mod download
 
 # Copy the go source
 COPY main.go main.go
-COPY api/ api/
+COPY cloud/ cloud/
+COPY cloudresources/ cloudresources/
 COPY controllers/ controllers/
 
 # Build
