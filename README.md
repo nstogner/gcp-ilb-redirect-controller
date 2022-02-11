@@ -1,6 +1,6 @@
 # gcp-ilb-redirect-controller
 
-**State**: Early Alpha
+**State**: Experimental
 
 Automates the [creation of HTTP to HTTPS load balancer resources](https://cloud.google.com/load-balancing/docs/l7-internal/setting-up-http-to-https-redirect#partial-http-lb) for Internal HTTP(S) Load Balancers.
 
