@@ -28,7 +28,7 @@ Deploy controller.
 kubectl apply -f deploy/
 ```
 
-Authorize controller with a GKE Workload Identity.
+Allow the controller to create GCP networking resources using GKE Workload Identity.
 
 ```sh
 export PROJECT=<your-gcp-project>
