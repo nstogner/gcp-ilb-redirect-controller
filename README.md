@@ -38,6 +38,8 @@ export KSA_NAME=ilb-redirect-controller-controller-manager
 export NAMESPACE=ilb-redirect-controller-system
 ```
 
+Create a GCP Service Account with the Network Admin role.
+
 ```sh
 gcloud iam service-accounts create $SA_NAME --project=$PROJECT
 
@@ -48,7 +50,11 @@ gcloud projects add-iam-policy-binding $PROJECT \
 gcloud iam service-accounts add-iam-policy-binding ${SA_NAME}@${PROJECT}.iam.gserviceaccount.com \
     --role roles/iam.workloadIdentityUser \
     --member "serviceAccount:${PROJECT}.svc.id.goog[${NAMESPACE}/${KSA_NAME}]"
+```
 
+Reference the GCP Service Account from the Kubernetes Service Account.
+
+```sh
 kubectl annotate serviceaccount $KSA_NAME \
     --namespace $NAMESPACE \
     iam.gke.io/gcp-service-account=${SA_NAME}@${PROJECT}.iam.gserviceaccount.com
